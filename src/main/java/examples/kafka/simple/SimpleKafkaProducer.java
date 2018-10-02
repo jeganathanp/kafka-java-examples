@@ -17,6 +17,7 @@ public class SimpleKafkaProducer {
         Properties props = new Properties();
         //Adding Kafka properties
         props.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
+        props.setProperty(ProducerConfig.CLIENT_ID_CONFIG,"test");
         //props.setProperty(ProducerConfig.CLIENT_ID_CONFIG,"test");
         props.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
         props.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
@@ -26,7 +27,5 @@ public class SimpleKafkaProducer {
         ProducerRecord<String, String> record = new ProducerRecord<String, String>("test","Hello World from java client");
         kafkaProducer.send(record);
         kafkaProducer.close();
-
-
     }
 }
