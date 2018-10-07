@@ -27,7 +27,7 @@ public class SynchronousSend {
         KafkaProducer<String, String> kafkaProducer = new KafkaProducer<String, String>(props);
         //create and send message
         ProducerRecord<String, String> record = new ProducerRecord<String, String>("test", "Hello World from java client");
-        //this will fire and leave kafka to handle the message
+        //this will fire and wait synchronously
         try {
             RecordMetadata data = kafkaProducer.send(record).get();
             System.out.println("Written in topic "+ data.topic());
@@ -38,6 +38,9 @@ public class SynchronousSend {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        kafkaProducer.close();
+        finally {
+            kafkaProducer.close();
+        }
+
     }
 }
